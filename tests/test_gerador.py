@@ -7,6 +7,8 @@ from Classes.carga import Carga
 from Classes.gerador_qualificado import GeradorQualificado
 from Classes.sistema_de_geracao_verde import SistemaDeGeracaoVerde
 
+import csv
+
 def test_exercicio1():
 
     print()
@@ -103,3 +105,37 @@ def test_exercicio2():
 
     # Exibindo Relátorio
     ps_verde.relatorio_totais_e_custos()
+
+    # Gerar Relatorio
+
+    relatorio_geradores = "relatorio_geradores.csv"
+
+    with open(relatorio_geradores, mode='w', newline='') as arquivo_csv:
+    # Criar um objeto escritor CSV
+        escritor_csv = csv.writer(arquivo_csv, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+    # Escrever o cabeçalho do CSV
+        escritor_csv.writerow(['Nome', 'Custo por MW', 'Tipo de Geração', 'Capacidade Atual (MW)', 'Capacidade Máxima (MW)'])
+
+    # Escrever os dados de cada gerador no arquivo CSV
+        for gerador in ps_verde.geradores:
+            dados = gerador.exportar_dados()
+            escritor_csv.writerow([dados['Nome'], dados['Custo por MW'], dados['Tipo de Geração'], dados['Capacidade Atual (MW)'], dados['Capacidade Máxima (MW)']])
+
+
+def test_MaisGeradoresDoQueDemanda():
+
+    print()
+    ps = SistemaDeGeracao()
+    g1 = Gerador("G1", 100)
+    g2 = Gerador("G2", 150)
+    c1 = Carga("C1", 50)
+    ps.adicionar_gerador(g1)
+    ps.adicionar_gerador(g2)
+    ps.adicionar_carga(c1)
+    c1.conectar()
+    ps.balancear()
+    print(f"{g1.nome}: {g1.capacidade_atual} MW")
+    print(f"{g2.nome}: {g2.capacidade_atual} MW")
+    
+    return

@@ -1,0 +1,8 @@
+Nome,Custo por MW,Tipo de Geração,Capacidade Atual (MW),Capacidade Máxima (MW)
+G4,8,termelétrica,120,120
+G6,3,termelétrica,40,40
+G1,5,eólica,100,100
+G2,6,solar,150,150
+G3,4,hidrelétrica,90,90
+G5,9,hidrelétrica,200,200
+G7,1,solar,40,40
