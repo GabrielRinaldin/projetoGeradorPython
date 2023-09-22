@@ -112,13 +112,10 @@ def test_exercicio2():
     relatorio_geradores = "relatorio_geradores.csv"
 
     with open(relatorio_geradores, mode='w', newline='') as arquivo_csv:
-    # Criar um objeto escritor CSV
         escritor_csv = csv.writer(arquivo_csv, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-    # Escrever o cabeçalho do CSV
         escritor_csv.writerow(['Nome', 'Custo por MW', 'Tipo de Geração', 'Capacidade Atual (MW)', 'Capacidade Máxima (MW)'])
 
-    # Escrever os dados de cada gerador no arquivo CSV
         for gerador in ps_verde.geradores:
             dados = gerador.exportar_dados()
             escritor_csv.writerow([dados['Nome'], dados['Custo por MW'], dados['Tipo de Geração'], dados['Capacidade Atual (MW)'], dados['Capacidade Máxima (MW)']])
