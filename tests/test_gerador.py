@@ -57,6 +57,7 @@ def test_exercicio2():
     g5 = GeradorQualificado("G5", 200, "hidrelétrica", 9 )
     g6 = GeradorQualificado("G6", 40, "termelétrica", 3 )
     g7 = GeradorQualificado("G7", 40, "solar", 1 )
+    g8 = GeradorQualificado("G8", 40, "solar", 1 )
 
     #Cargas
     c1 = Carga("C1", 50)
@@ -129,6 +130,23 @@ def test_MaisGeradoresDoQueDemanda():
     ps = SistemaDeGeracao()
     g1 = Gerador("G1", 100)
     g2 = Gerador("G2", 150)
+    c1 = Carga("C1", 50)
+    ps.adicionar_gerador(g1)
+    ps.adicionar_gerador(g2)
+    ps.adicionar_carga(c1)
+    c1.conectar()
+    ps.balancear()
+    print(f"{g1.nome}: {g1.capacidade_atual} MW")
+    print(f"{g2.nome}: {g2.capacidade_atual} MW")
+    
+    return
+
+def test_MaisGeradoresDoQueDemandaGeradorVerde():
+
+    print()
+    ps = SistemaDeGeracaoVerde()
+    g1 = GeradorQualificado("G1", 100, "eólica", 5)
+    g2 = GeradorQualificado("G2", 150, "solar", 6)
     c1 = Carga("C1", 50)
     ps.adicionar_gerador(g1)
     ps.adicionar_gerador(g2)
